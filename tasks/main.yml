@@ -1,0 +1,49 @@
+---
+# tasks file for /etc/ansible/roles/mynginx
+      - name: run apt update
+        command: apt update
+        tags:
+          - update
+
+      - name: install nginx
+        apt: >
+          name=nginx
+          state=present
+        tags:
+            - install
+
+      - name: copy html file to destination
+        notify:
+           - restart nginx
+        copy: >
+           src=index.html
+           dest=/var/www/html/index.html
+           owner=root
+           group=root
+           mode=0644
+        tags:
+            - html
+
+      - name: copy css files to destination
+        notify:
+          - restart nginx
+        copy: >
+          src=style.css
+          dest=/var/www/html/style.css
+          owner=root
+          group=root
+          mode=0644
+        tags: 
+           - css
+
+      - name: copy js file to destination
+        notify:
+          - restart nginx
+        copy: >
+          src=scorekeeper.js
+          dest=/var/www/html/scorekeeper.js
+          owner=root
+          group=root
+          mode=0644
+        tags:
+           - js

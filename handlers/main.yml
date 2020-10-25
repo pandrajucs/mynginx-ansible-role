@@ -1,0 +1,4 @@
+---
+# handlers file for /etc/ansible/roles/mynginx
+- name: restart nginx
+  command: service nginx restart
