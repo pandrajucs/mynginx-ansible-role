@@ -1,0 +1,6 @@
+---
+  - name: playbook for installing nginx on webservers
+    hosts: web
+    gather_facts: yes
+    roles:
+       - mynginx
